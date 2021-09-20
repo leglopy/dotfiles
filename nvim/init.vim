@@ -28,9 +28,15 @@ set undodir=~/.vim/undodir
 set undofile
 
 language en_US
-
 "let g:python3_host_prog = '/usr/bin/python3'
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
+" Dart
+Plug 'dart-lang/dart-vim-plugin'
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'natebosch/dartlang-snippets'
+
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -54,6 +60,7 @@ set encoding=utf-8
 
 nnoremap <leader>u :UndotreeToggle<CR>
 
+vmap <C-p> <Plug>(coc-format-selected)
 nmap <C-h> <C-w>h
 "nmap <C-j> <C-w>j
 "nmap <C-k> <C-w>k

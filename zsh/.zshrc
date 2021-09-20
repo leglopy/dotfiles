@@ -99,11 +99,16 @@ if [ -f '~/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '~/Downloads/googl
 # The next line enables shell command completion for gcloud.
 if [ -f '~/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '~/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
-export PATH="${PATH}:~/Library/Python/3.8/bin"
-export PYTHONPATH="${PYTHONPATH}:~/Library/Python/3.8/bin"
-
+export PATH="${PATH}:/usr/bin/python3"
+export PYTHONPATH="${PYTHONPATH}:/usr/bin/python3"
+# export PATH=$PATH:/usr/local/opt/python@3.9/Frameworks/Python.framework/Versions/3.9/bin 
+export PATH=$PATH:~/flutter/bin
+export DART_SDK="${DART_SDK}:~/flutter/bin/cache/dart-sdk"
+export LANG="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
 
 autoload -Uz compinit
 compinit
 # Completion for kitty
 kitty + complete setup zsh | source /dev/stdin
+export PATH="/usr/local/sbin:$PATH"
