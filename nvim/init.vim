@@ -1,4 +1,4 @@
-" Ignore files
+"Ignore files
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=**/coverage/*
@@ -51,8 +51,12 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'hoob3rt/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+let g:coc_global_extensions = ['coc-snippets', 'coc-prettier', 'coc-html', 'coc-highlight', 'coc-tsserver', 'coc-json', 'coc-flutter', 'coc-css']
+
 call plug#end()
 
 let mapleader = " "
@@ -60,16 +64,28 @@ set encoding=utf-8
 
 nnoremap <leader>u :UndotreeToggle<CR>
 
+" Search
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
 vmap <C-p> <Plug>(coc-format-selected)
 nmap <C-h> <C-w>h
-"nmap <C-j> <C-w>j
-"nmap <C-k> <C-w>k
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
-
+noremap <C-p> :CocCommand prettier.formatFile<CR>
+nnoremap <Leader>+ :vertical resize +5<CR>
+nnoremap <Leader>- :vertical resize -5<CR>
+nnoremap <leader>fe :CocCommand flutter.emulators<CR>
+nnoremap <leader>fr :CocCommand flutter.dev.hotRestart<CR>
+nnoremap <leader>fd :below CocCommand flutter.dev.openDevLog<CR>
+nnoremap <silent> <leader>cf  :<C-u>CocList --input=flutter. commands<CR>
 noremap <Leader>y "*y
 noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
+nnoremap cn *``cgn
+nnoremap cN *``cgN
 
 augroup highlight_yank
     autocmd!
