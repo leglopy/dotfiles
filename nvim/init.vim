@@ -36,7 +36,7 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'natebosch/dartlang-snippets'
-
+Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -54,6 +54,11 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'stsewd/fzf-checkout.vim'
+
+
 
 let g:coc_global_extensions = ['coc-snippets', 'coc-prettier', 'coc-html', 'coc-highlight', 'coc-tsserver', 'coc-json', 'coc-flutter', 'coc-css']
 
@@ -63,6 +68,17 @@ let mapleader = " "
 set encoding=utf-8
 
 nnoremap <leader>u :UndotreeToggle<CR>
+
+" Git
+" let $FZF_DEFAULT_OPTS='--reverse'
+nnoremap <leader>gb :GBranches<CR>
+nnoremap <leader>ga :Git fetch --all<CR>
+nnoremap <leader>grum :Git rebase upstream/master<CR>
+nnoremap <leader>grom :Git rebase origin/master<CR>
+
+nmap <leader>gf :diffget //2 <Bar>diffupdate<CR>
+nmap <leader>gj :diffget //3 <Bar>diffupdate<CR>
+nmap <leader>g; :G<CR>
 
 " Search
 nnoremap n nzzzv
