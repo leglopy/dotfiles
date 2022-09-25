@@ -58,8 +58,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
 
-
-
 let g:coc_global_extensions = ['coc-snippets', 'coc-prettier', 'coc-html', 'coc-highlight', 'coc-tsserver', 'coc-json', 'coc-flutter', 'coc-css']
 
 call plug#end()
@@ -68,17 +66,6 @@ let mapleader = " "
 set encoding=utf-8
 
 nnoremap <leader>u :UndotreeToggle<CR>
-
-" Git
-" let $FZF_DEFAULT_OPTS='--reverse'
-nnoremap <leader>gb :GBranches<CR>
-nnoremap <leader>ga :Git fetch --all<CR>
-nnoremap <leader>grum :Git rebase upstream/master<CR>
-nnoremap <leader>grom :Git rebase origin/master<CR>
-
-nmap <leader>gf :diffget //2 <Bar>diffupdate<CR>
-nmap <leader>gj :diffget //3 <Bar>diffupdate<CR>
-nmap <leader>g; :G<CR>
 
 " Search
 nnoremap n nzzzv
@@ -92,10 +79,7 @@ nmap <C-l> <C-w>l
 noremap <C-p> :Format<CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
-nnoremap <leader>fe :CocCommand flutter.emulators<CR>
-nnoremap <leader>fr :CocCommand flutter.dev.hotRestart<CR>
-nnoremap <leader>fd :below CocCommand flutter.dev.openDevLog<CR>
-nnoremap <silent> <leader>cf  :<C-u>CocList --input=flutter. commands<CR>
+
 noremap <Leader>y "*y
 noremap <Leader>p "*p
 noremap <Leader>Y "+y
@@ -107,3 +91,10 @@ augroup highlight_yank
     autocmd!
     au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
 augroup END
+
+" Flutter 
+nnoremap <leader>fe :CocCommand flutter.emulators<CR>
+nnoremap <leader>fr :CocCommand flutter.dev.hotRestart<CR>
+nnoremap <leader>fd :below CocCommand flutter.dev.openDevLog<CR>
+nnoremap <leader>fj flutter pub run build_runner build<CR>
+nnoremap <silent> <leader>cf  :<C-u>CocList --input=flutter. commands<CR>
