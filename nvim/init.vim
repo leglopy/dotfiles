@@ -11,6 +11,7 @@ set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
 set smartindent
+set autoindent
 
 set exrc
 "set guicursor=
@@ -57,6 +58,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 
 let g:coc_global_extensions = ['coc-snippets', 'coc-prettier', 'coc-html', 'coc-highlight', 'coc-tsserver', 'coc-json', 'coc-flutter', 'coc-css']
 
@@ -87,14 +89,33 @@ noremap <Leader>P "+p
 nnoremap cn *``cgn
 nnoremap cN *``cgN
 
+autocmd BufRead,BufNewFile *.md set filetype=markdown
+
+" Spell-check Markdown files
+autocmd FileType markdown setlocal spell
+
+" Spell-check Git messages
+autocmd FileType gitcommit setlocal spell
+
+" Set spellfile to location that is guaranteed to exist,
+" can be symlinked to Dropbox or kept in Git
+" and managed outside of thoughtbot/dotfiles using rcm.
+set spellfile=$HOME/.vim-spell-en.utf-8.add
+
+" Autocomplete with dictionary words when spell check is on
+set complete+=kspell
+
 augroup highlight_yank
     autocmd!
     au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
 augroup END
 
-" Flutter 
+" Flutter
 nnoremap <leader>fe :CocCommand flutter.emulators<CR>
 nnoremap <leader>fr :CocCommand flutter.dev.hotRestart<CR>
 nnoremap <leader>fd :below CocCommand flutter.dev.openDevLog<CR>
 nnoremap <leader>fj flutter pub run build_runner build<CR>
 nnoremap <silent> <leader>cf  :<C-u>CocList --input=flutter. commands<CR>
+
+lua << EOF
+EOF

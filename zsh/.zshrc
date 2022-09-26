@@ -113,3 +113,5 @@ compinit
 # Completion for kitty
 kitty + complete setup zsh | source /dev/stdin
 export PATH="/usr/local/sbin:$PATH"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
