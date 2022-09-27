@@ -27,6 +27,7 @@ set noswapfile
 set nobackup
 set undodir=~/.vim/undodir
 set undofile
+set colorcolumn=100
 
 language en_US
 "let g:python3_host_prog = '/usr/bin/python3'
@@ -81,6 +82,7 @@ nmap <C-l> <C-w>l
 noremap <C-p> :Format<CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
+nnoremap x "_x
 
 noremap <Leader>y "*y
 noremap <Leader>p "*p
@@ -88,6 +90,10 @@ noremap <Leader>Y "+y
 noremap <Leader>P "+p
 nnoremap cn *``cgn
 nnoremap cN *``cgN
+
+"Copy/Paste multi-times in visual mode
+xnoremap <expr> p 'pgv"'.v:register.'y`>'
+xnoremap <expr> P 'Pgv"'.v:register.'y`>'
 
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 
