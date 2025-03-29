@@ -7,6 +7,8 @@ set wildignore+=**/android/*
 set wildignore+=**/ios/*
 set wildignore+=**/.git/*
 
+" set clipboard^=unnamed,unnamedplus
+
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
@@ -28,17 +30,23 @@ set nobackup
 set undodir=~/.vim/undodir
 set undofile
 set colorcolumn=100
+set backupcopy=yes
 
-language en_US
+"language en_US
 "let g:python3_host_prog = '/usr/bin/python3'
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
-" Dart
-Plug 'dart-lang/dart-vim-plugin'
 " Svelte
 Plug 'leafOfTree/vim-svelte-plugin'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 let g:vim_svelte_plugin_load_full_syntax = 1
- Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+Plug 'zk-org/zk-nvim'
+Plug 'folke/todo-comments.nvim'
+Plug 'NvChad/nvim-colorizer.lua'
+" Dart
+Plug 'dart-lang/dart-vim-plugin'
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -49,6 +57,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'joshdick/onedark.vim'
+Plug 'ray-x/aurora'      " for Plug user
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
@@ -61,13 +70,33 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+Plug 'olacin/telescope-cc.nvim'
+Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+" Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
+Plug 'Exafunction/codeium.nvim', { 'branch': 'main' }
 
-let g:coc_global_extensions = ['coc-snippets', 'coc-prettier', 'coc-html', 'coc-highlight', 'coc-tsserver', 'coc-json', 'coc-flutter', 'coc-css']
+Plug 'loctvl842/monokai-pro.nvim'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+"LSP
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neovim/nvim-lspconfig'
+
+"Autocomplete and snippets LSP
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v4.x'}
+
+"Show signature when you type
+Plug 'ray-x/lsp_signature.nvim'
+
+"Mini.AI
+Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }
 
 call plug#end()
 
@@ -80,12 +109,10 @@ nnoremap <leader>u :UndotreeToggle<CR>
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-vmap <C-p> <Plug>(coc-format-selected)
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
-noremap <C-p> :Format<CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
 nnoremap x "_x
@@ -123,12 +150,27 @@ augroup highlight_yank
 augroup END
 
 " Flutter
-nnoremap <leader>fe :CocCommand flutter.emulators<CR>
-nnoremap <leader>fr :CocCommand flutter.dev.hotRestart<CR>
-nnoremap <leader>fd :below CocCommand flutter.dev.openDevLog<CR>
-nnoremap <leader>fj flutter pub run build_runner build<CR>
-nnoremap <silent> <leader>cf  :<C-u>CocList --input=flutter. commands<CR>
+"nnoremap <leader>fe :CocCommand flutter.emulators<CR>
+"nnoremap <leader>fr :CocCommand flutter.dev.hotRestart<CR>
+"nnoremap <leader>fd :below CocCommand flutter.dev.openDevLog<CR>
+"nnoremap <leader>fj flutter pub run build_runner build<CR>
+"nnoremap <silent> <leader>cf  :<C-u>CocList --input=flutter. commands<CR>
 
-command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+"Telescope conventional commits
+nnoremap <leader>g :Telescope conventional_commits<CR>
+
+"Colorizer
 lua << EOF
+require 'colorizer'.setup()
+require 'lsp_shortcuts'
+require 'mason_lsp'
+require 'zk_init'
+require'nvim-treesitter.configs'.setup{
+          ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html" },
+          sync_install = false,
+          highlight = { enable = true },
+          indent = { enable = true },
+}
+require('todo-comments').setup{}
+require('mini.ai').setup()
 EOF
