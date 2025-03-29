@@ -34,6 +34,11 @@ language en_US
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 " Dart
 Plug 'dart-lang/dart-vim-plugin'
+" Svelte
+Plug 'leafOfTree/vim-svelte-plugin'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+let g:vim_svelte_plugin_load_full_syntax = 1
+ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -124,5 +129,6 @@ nnoremap <leader>fd :below CocCommand flutter.dev.openDevLog<CR>
 nnoremap <leader>fj flutter pub run build_runner build<CR>
 nnoremap <silent> <leader>cf  :<C-u>CocList --input=flutter. commands<CR>
 
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 lua << EOF
 EOF

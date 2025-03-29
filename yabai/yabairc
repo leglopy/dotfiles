@@ -2,36 +2,38 @@
 sudo yabai --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
-yabai -m config mouse_follows_focus          on
-yabai -m config focus_follows_mouse          autoraise
-yabai -m config window_placement             second_child
-yabai -m config window_topmost               off
-yabai -m config window_shadow                float
-yabai -m config window_opacity               on
-yabai -m config window_opacity_duration      0.0
-yabai -m config active_window_opacity        1.0
-yabai -m config normal_window_opacity        0.95
-#yabai -m config window_border                on
-#yabai -m config window_border_width          6
-#yabai -m config active_window_border_color   0xff775759
-#yabai -m config active_window_border_color   0xff7aa2f7
-#yabai -m config normal_window_border_color   0xff555555
-#yabai -m config insert_feedback_color       0xffd75f5f
-yabai -m config split_ratio                  0.50
-yabai -m config auto_balance                 off
-yabai -m config mouse_modifier               cmd
-yabai -m config mouse_action1                move
-yabai -m config mouse_action2                resize
-yabai -m config mouse_drop_action            swap 
+yabai -m config                                 \
+    mouse_follows_focus          off            \
+    focus_follows_mouse          off            \
+    window_origin_display        default        \
+    window_placement             second_child   \
+    window_zoom_persist          on             \
+    window_shadow                on             \
+    window_animation_duration    0.0            \
+    window_animation_frame_rate  120            \
+    window_opacity_duration      0.0            \
+    active_window_opacity        1.0            \
+    normal_window_opacity        0.90           \
+    window_opacity               off            \
+    insert_feedback_color        0xffd75f5f     \
+    split_ratio                  0.50           \
+    split_type                   auto           \
+    auto_balance                 off            \
+    top_padding                  12             \
+    bottom_padding               12             \
+    left_padding                 12             \
+    right_padding                12             \
+    window_gap                   06             \
+    layout                       bsp            \
+    mouse_modifier               cmd            \
+    mouse_action1                move           \
+    mouse_action2                resize         \
+    mouse_drop_action            swap
 
-
-# general space settings
-yabai -m config layout                       bsp
-yabai -m config top_padding                  36 
-yabai -m config bottom_padding               12 
-yabai -m config left_padding                 12 
-yabai -m config right_padding                12 
-yabai -m config window_gap                   12
+# add 20 padding to the top and 0 padding to the bottom of every space located on the main display
+#yabai -m config external_bar main:30:0
+# add 20 padding to the top and bottom of all spaces regardless of the display it belongs to
+yabai -m config external_bar all:30:0
 
 yabai -m space 1 --label web 
 yabai -m space 2 --label code 
@@ -49,5 +51,5 @@ yabai -m space 10 --label misc
 #yabai -m rule --add app="Mail"                 space=7
 
 yabai -m rule --add app="^System Preferences$" layer=above manage=off
-yabai -m signal --add event=space_changed action="~/.config/scripts/refreshPolybar.sh"
+osascript -e 'tell application id "tracesOf.Uebersicht" to refresh'
 yabai -m config debug_output on
