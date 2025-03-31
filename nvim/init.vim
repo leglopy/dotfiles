@@ -33,7 +33,7 @@ set colorcolumn=100
 set backupcopy=yes
 
 "language en_US
-"let g:python3_host_prog = '/usr/bin/python3'
+let g:python3_host_prog = '/usr/bin/python3'
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 " Svelte
 Plug 'leafOfTree/vim-svelte-plugin'
