@@ -1,12 +1,12 @@
 let g:tokyonight_style = "night"
 let g:tokyonight_italic_functions = 1
-let g:lightline = {'colorscheme': 'onedark'}
+" let g:lightline = {'colorscheme': 'onedark'}
 
-" let g:lightline = {'colorscheme': 'monokaipro'}
+let g:lightline = {'colorscheme': 'monokaipro'}
 
 syntax on
-colorscheme onedark 
-" colorscheme monokai-pro 
+" colorscheme onedark 
+colorscheme monokai-pro 
 
 
 

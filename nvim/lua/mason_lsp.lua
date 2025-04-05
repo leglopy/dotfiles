@@ -1,6 +1,7 @@
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "lua_ls", "rust_analyzer", "biome" },
+    ensure_installed = { "lua_ls", "rust_analyzer", "biome", "astro" },
+    automatic_installation = true,
     handlers = {
         function(server_name)
             require('lspconfig')[server_name].setup({})

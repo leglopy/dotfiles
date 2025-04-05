@@ -166,11 +166,18 @@ require 'lsp_shortcuts'
 require 'mason_lsp'
 require 'zk_init'
 require'nvim-treesitter.configs'.setup{
-          ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html" },
+          ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "typescript", "javascript", "html", "astro" },
           sync_install = false,
           highlight = { enable = true },
           indent = { enable = true },
 }
 require('todo-comments').setup{}
 require('mini.ai').setup()
+vim.cmd([[
+augroup _astro
+autocmd!
+autocmd BufRead,BufEnter *.astro set filetype=astro
+augroup end
+]])
 EOF
+
